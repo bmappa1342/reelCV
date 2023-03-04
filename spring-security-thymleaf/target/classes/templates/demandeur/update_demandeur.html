@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="index">
+    <head>
+        <meta charset="ISO-8859-1">
+        <title> CV</title>
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    </head>
+
+    <body>
+    <div layout:fragment="content1">
+      <div class="container">
+        <div class="container my-2">
+          <h1>CV</h1>
+          <table border="1" class = "table">
+            <thead thead class="thead-dark">
+            <tr>
+              <th>
+                <a th:href="@{'/page/' + ${currentPage} + '?sortField=prenome&sortDir=' + ${reverseSortDir}}">Prenom</a>
+              </th>
+              <th>
+                <a th:href="@{'/page/' + ${currentPage} + '?sortField=nom&sortDir=' + ${reverseSortDir}}">Nom</a>
+              </th>
+              <th>
+                <a th:href="@{'/page/' + ${currentPage} + '?sortField=email&sortDir=' + ${reverseSortDir}}">Email</a>
+              </th>
+              <th>
+                <a th:href="@{'/page/' + ${currentPage} + '?sortField=age&sortDir=' + ${reverseSortDir}}">Age</a>
+              </th>
+              <th>
+                <a th:href="@{'/page/' + ${currentPage} + '?sortField=telephone&sortDir=' + ${reverseSortDir}}">telephone</a>
+              </th>
+              <th>
+                <a th:href="@{'/page/' + ${currentPage} + '?sortField=specialite&sortDir=' + ${reverseSortDir}}">specialite</a>
+              </th>
+              <th>
+                <a th:href="@{'/page/' + ${currentPage} + '?sortField=niveauEtude&sortDir=' + ${reverseSortDir}}">niveauEtude</a>
+              </th>
+              <th>
+                <a th:href="@{'/page/' + ${currentPage} + '?sortField=experienceProfessionnelle&sortDir=' + ${reverseSortDir}}">experienceProfessionnelle</a>
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="demandeur : ${ListDemande}">
+              <td th:text="${demandeur.prenom}"></td>
+              <td th:text="${demandeur.nom}"></td>
+              <td th:text="${demandeur.email}"></td>
+              <td th:text="${demandeur.age}"></td>
+              <td th:text="${demandeur.telephone}"></td>
+              <td th:text="${demandeur.specialite}"></td>
+              <td th:text="${demandeur.niveauEtude}"></td>
+              <td th:text="${demandeur.experienceProfessionnelle}"></td>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+
+          <div th:if = "${totalPages > 1}">
+            <div class = "row col-sm-10">
+              <div class = "col-sm-2">
+                Total Rows: [[${totalItems}]]
+              </div>
+              <div class = "col-sm-1">
+                     <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+                      <a th:if="${currentPage != i}" th:href="@{'/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
+                      <span th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;
+                     </span>
+              </div>
+              <div class = "col-sm-1">
+                <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
+                <span th:unless="${currentPage < totalPages}">Next</span>
+              </div>
+
+              <div class="col-sm-1">
+                <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
+                <span th:unless="${currentPage < totalPages}">Last</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        Welcome <span sec:authentication="principal.username"> User</span>
+      </div>
+    </div>
+    </body>
+
+</html>

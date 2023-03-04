@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="index">
+
+<head>
+  <meta charset="ISO-8859-1">
+  <title>Categorie</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+
+<body>
+<div layout:fragment="content1">
+<div class="container">
+
+  <hr>
+  <h2>Nouveau categorie</h2>
+
+  <form action="#" th:action="@{/saveCategorie}" th:object="${categorie}" method="POST">
+    <input type="text" th:field="*{libelle}" placeholder="libelle" class="form-control mb-4 col-4">
+
+
+    <button type="submit" class="btn btn-info col-2"> Enregsitrer</button>
+  </form>
+
+  <hr>
+
+  <a th:href="@{/listCategorie}"> Liste des categorie</a>
+</div>
+</div>
+</body>
+
+</html>
